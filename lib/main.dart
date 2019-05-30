@@ -14,8 +14,6 @@ void main() {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.black));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: MultiProvider(

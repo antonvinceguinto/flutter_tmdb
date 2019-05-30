@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DetailScreen extends StatefulWidget {
   final movie;
@@ -14,7 +15,10 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildBody(context, widget.movie, widget.index),
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: _buildBody(context, widget.movie, widget.index),
+      ),
     );
   }
 }
@@ -28,14 +32,14 @@ Widget _buildBody(context, movie, index) {
             Stack(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(top: 20),
+                  height: 350,
                   child: Image(
+                    fit: BoxFit.fitHeight,
                     image: NetworkImage(
                         'https://image.tmdb.org/t/p/w500/${movie.getListResponse()[index]['backdrop_path']}'),
                   ),
                 ),
                 Container(
-                  height: 250,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
@@ -75,22 +79,26 @@ Widget _buildBody(context, movie, index) {
                 ),
               ],
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    topRight: Radius.circular(50),
+            Container(
+              margin: EdgeInsets.only(top: 300),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
+                      ),
+                      child: Container(
+                        width: double.infinity,
+                        color: Color(0xFF192a56),
+                      ),
+                    ),
                   ),
-                  child: Container(
-                    height: 480,
-                    width: double.infinity,
-                    color: Colors.red,
-                    // child: Text('Anton'),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),

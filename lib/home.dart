@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:tmdb/src/clippers/custom_clipper.dart';
 import 'package:tmdb/src/states/popular_movie_state.dart';
@@ -30,55 +31,59 @@ class _HomeState extends State<Home> {
     final popularTvState = Provider.of<PopularTvState>(context);
 
     return Scaffold(
-      body: RefreshIndicator(
-        key: _refreshIndicatorKey,
-        onRefresh: () async {
-          showingState.fetchMovies();
-          popularState.fetchMovies();
-          upcomingState.fetchMovies();
-          popularTvState.fetchMovies();
-          await _dismiss();
-        },
-        child: ListView(
-          children: <Widget>[
-            Wrap(
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    ClipPath(
-                      clipper: CustomShapeClipper(),
-                      child: Container(
-                        height: 330,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Colors.redAccent, Colors.deepOrange],
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.dark,
+        child: RefreshIndicator(
+          key: _refreshIndicatorKey,
+          onRefresh: () async {
+            showingState.fetchMovies();
+            popularState.fetchMovies();
+            upcomingState.fetchMovies();
+            popularTvState.fetchMovies();
+            await _dismiss();
+          },
+          child: ListView(
+            children: <Widget>[
+              Wrap(
+                children: <Widget>[
+                  Stack(
+                    children: <Widget>[
+                      ClipPath(
+                        clipper: CustomShapeClipper(),
+                        child: Container(
+                          height: 330,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Colors.redAccent, Colors.deepOrange],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Wrap(
-                      children: <Widget>[
-                        MyAppBar(),
-                        ShowingList(),
-                        Container(
-                          margin: EdgeInsets.only(top: 60),
-                          child: _buildTextHeaders('Popular Movies'),
-                        ),
-                        PopularList(),
-                        _buildTextHeaders('Upcoming Movies'),
-                        UpcomingList(),
-                        Container(
-                          margin: EdgeInsets.only(top: 20),
-                          child: _buildTextHeaders('TV Series you might like'),
-                        ),
-                        PopularTvList(),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
+                      Wrap(
+                        children: <Widget>[
+                          MyAppBar(),
+                          ShowingList(),
+                          Container(
+                            margin: EdgeInsets.only(top: 60),
+                            child: _buildTextHeaders('Popular Movies'),
+                          ),
+                          PopularList(),
+                          _buildTextHeaders('Upcoming Movies'),
+                          UpcomingList(),
+                          Container(
+                            margin: EdgeInsets.only(top: 20),
+                            child:
+                                _buildTextHeaders('TV Series you might like'),
+                          ),
+                          PopularTvList(),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
