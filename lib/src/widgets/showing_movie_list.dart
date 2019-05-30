@@ -17,14 +17,18 @@ class _ShowingListState extends State<ShowingList> {
             child: movie.isFetching
                 ? _
                 : movie.getListResponse() != null
-                    ? ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: movie.getListResponse().length,
-                        itemBuilder: (context, index) {
-                          return _buildItem(movie, index, context);
-                        },
+                    ? Container(
+                        margin: EdgeInsets.only(top: 20),
+                        height: 180,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          physics: const ClampingScrollPhysics(),
+                          itemCount: movie.getListResponse().length,
+                          itemBuilder: (context, index) {
+                            return _buildItem(movie, index, context);
+                          },
+                        ),
                       )
                     : Text("Needs Refresh"),
           ),

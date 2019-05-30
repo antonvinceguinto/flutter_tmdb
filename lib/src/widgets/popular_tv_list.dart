@@ -16,14 +16,18 @@ class _PopularTvListState extends State<PopularTvList> {
             child: movie.isFetching
                 ? _
                 : movie.getListResponse() != null
-                    ? ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: movie.getListResponse().length,
-                        itemBuilder: (context, index) {
-                          return  _buildItem(movie, index);
-                        },
+                    ? Container(
+                        margin: EdgeInsets.only(bottom: 20),
+                        height: 140,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          physics: const ClampingScrollPhysics(),
+                          itemCount: movie.getListResponse().length,
+                          itemBuilder: (context, index) {
+                            return _buildItem(movie, index);
+                          },
+                        ),
                       )
                     : Text("Needs Refresh"),
           ),
