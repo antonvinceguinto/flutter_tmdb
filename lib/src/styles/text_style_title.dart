@@ -8,6 +8,12 @@ final headerTextStyle = baseTextStyle.copyWith(
   fontWeight: FontWeight.w600
 );
 
+final headerTextStyleDetail = baseTextStyle.copyWith(
+  color: Color(0xFFecf0f1),
+  fontSize: 20,
+  fontWeight: FontWeight.w600
+);
+
 final regularTextStyle = baseTextStyle.copyWith(
   color: Color(0xffb6b2df),
   fontSize: 14,

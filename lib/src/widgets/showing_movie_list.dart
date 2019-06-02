@@ -4,12 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:tmdb/src/screens/detail_screen.dart';
 import 'package:tmdb/src/states/showing_movie_state.dart';
 
-class ShowingList extends StatefulWidget {
-  @override
-  _ShowingListState createState() => _ShowingListState();
-}
-
-class _ShowingListState extends State<ShowingList> {
+class ShowingList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ShowingMovieState>(
