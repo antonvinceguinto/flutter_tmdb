@@ -3,28 +3,48 @@ import 'package:flutter/services.dart';
 import 'package:tmdb/src/styles/text_style_title.dart';
 
 class DetailScreen extends StatefulWidget {
-  final movie;
-  final index;
+  // final movie;
+  final String posterUrl;
+  final String title;
+  final String description;
 
-  DetailScreen(this.movie, this.index);
+  DetailScreen({
+    this.posterUrl,
+    this.title,
+    this.description,
+  });
 
   @override
-  _DetailScreenState createState() => _DetailScreenState();
+  _DetailScreenState createState() => _DetailScreenState(
+        posterUrl: posterUrl,
+        title: title,
+        description: description,
+      );
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  final String posterUrl;
+  final String title;
+  final String description;
+
+  _DetailScreenState({
+    this.posterUrl,
+    this.title,
+    this.description,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
-        child: _buildBody(context, widget.movie, widget.index),
+        child: _buildBody(context, widget.posterUrl, widget.title),
       ),
     );
   }
 }
 
-Widget _buildBody(context, movie, index) {
+Widget _buildBody(context, posterUrl, title) {
   return Column(
     children: <Widget>[
       Expanded(
@@ -36,8 +56,7 @@ Widget _buildBody(context, movie, index) {
                   height: 350,
                   child: Image(
                     fit: BoxFit.fitHeight,
-                    image: NetworkImage(
-                        'https://image.tmdb.org/t/p/w500/${movie.getListResponse()[index]['backdrop_path']}'),
+                    image: NetworkImage(posterUrl),
                   ),
                 ),
                 Container(
@@ -97,7 +116,7 @@ Widget _buildBody(context, movie, index) {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             _buildGenreChips(),
-                            _buildTextHeaders('${movie.getListResponse()[index]['title']}'),
+                            _buildTextHeaders(title),
                           ],
                         ),
                       ),

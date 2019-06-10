@@ -34,8 +34,13 @@ class ShowingList extends StatelessWidget {
 Widget _buildItem(movie, index, context) {
   return GestureDetector(
     onTap: () {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => DetailScreen(movie, index))
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  DetailScreen(posterUrl: 'https://image.tmdb.org/t/p/w500/${movie.getListResponse()[index]['backdrop_path']}',
+                  title: '${movie.getListResponse()[index]['title']}',
+                  description: '${movie.getListResponse()[index]['overview']}',))
           // SlideRightRoute(widget: DetailScreen(movie, index)),
           );
     },

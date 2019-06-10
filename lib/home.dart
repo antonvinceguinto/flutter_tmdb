@@ -103,7 +103,7 @@ class _HomeState extends State<Home> {
   }
 }
 
-_buildTextHeaders(String title) {
+Widget _buildTextHeaders(String title) {
   return Container(
     width: double.infinity,
     margin: EdgeInsets.only(top: 20, bottom: 20, left: 20),
