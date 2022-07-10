@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tmdb_riverpod/src/environment_config.dart';
-import 'package:tmdb_riverpod/src/features/home/movie_interface.dart';
 import 'package:tmdb_riverpod/src/models/movie.dart';
+import 'package:tmdb_riverpod/src/repositories/movie_interface.dart';
 import 'package:tmdb_riverpod/src/utils/errors/movies_exception.dart';
 
 class MovieService extends IMovie {

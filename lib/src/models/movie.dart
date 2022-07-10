@@ -7,10 +7,10 @@ class Movie {
     required this.id,
     required this.title,
     required this.posterPath,
-    // required this.backdropPath,
-    // required this.overview,
-    // required this.releaseDate,
-    // required this.voteAverage,
+    required this.backdropPath,
+    required this.overview,
+    required this.releaseDate,
+    required this.voteAverage,
   });
 
   factory Movie.fromJson(String source) =>
@@ -21,41 +21,43 @@ class Movie {
       id: map['id'] as int,
       title: map['title']?.toString() ?? '',
       posterPath: map['poster_path']?.toString() ?? '',
-      // backdropPath: map['backdropPath'] as String,
-      // overview: map['overview'] as String,
-      // releaseDate: map['releaseDate'] as String,
-      // voteAverage: map['voteAverage'] as double,
+      backdropPath: map['backdrop_path']?.toString() ?? '',
+      overview: map['overview']?.toString() ?? '',
+      releaseDate: map['releaseDate']?.toString() ?? '',
+      voteAverage: double.tryParse(map['voteAverage'].toString()) ?? 0,
     );
   }
 
-  // String get fullImageUrl => 'https://image.tmdb.org/t/p/w500/$posterPath';
   String get fullImageUrl => 'https://image.tmdb.org/t/p/w200$posterPath';
+  String get fullImageUrlHD => 'https://image.tmdb.org/t/p/w500$posterPath';
+  String get fullBackdropImageUrl =>
+      'https://image.tmdb.org/t/p/w500$backdropPath';
 
   final int id;
   final String title;
   final String posterPath;
-  // final String backdropPath;
-  // final String overview;
-  // final String releaseDate;
-  // final double voteAverage;
+  final String backdropPath;
+  final String overview;
+  final String releaseDate;
+  final double voteAverage;
 
   Movie copyWith({
     int? id,
     String? title,
     String? posterPath,
-    // String? backdropPath,
-    // String? overview,
-    // String? releaseDate,
-    // double? voteAverage,
+    String? backdropPath,
+    String? overview,
+    String? releaseDate,
+    double? voteAverage,
   }) {
     return Movie(
       id: id ?? this.id,
       title: title ?? this.title,
       posterPath: posterPath ?? this.posterPath,
-      // backdropPath: backdropPath ?? this.backdropPath,
-      // overview: overview ?? this.overview,
-      // releaseDate: releaseDate ?? this.releaseDate,
-      // voteAverage: voteAverage ?? this.voteAverage,
+      backdropPath: backdropPath ?? this.backdropPath,
+      overview: overview ?? this.overview,
+      releaseDate: releaseDate ?? this.releaseDate,
+      voteAverage: voteAverage ?? this.voteAverage,
     );
   }
 
@@ -64,10 +66,10 @@ class Movie {
       'id': id,
       'title': title,
       'poster_path': posterPath,
-      // 'backdropPath': backdropPath,
-      // 'overview': overview,
-      // 'releaseDate': releaseDate,
-      // 'voteAverage': voteAverage,
+      'backdrop_path': backdropPath,
+      'overview': overview,
+      'releaseDate': releaseDate,
+      'voteAverage': voteAverage,
     };
   }
 

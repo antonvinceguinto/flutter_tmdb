@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tmdb_riverpod/src/features/home/home.dart';
+import 'package:tmdb_riverpod/src/features/movie_details/movie_details.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -43,6 +44,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blueGrey,
         backgroundColor: Colors.blueGrey.shade900,
+        textTheme: const TextTheme(
+          headline5: TextStyle(
+            color: Colors.white,
+          ),
+          bodyText2: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+          ),
+          subtitle1: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         appBarTheme: AppBarTheme(
           color: Colors.blueGrey.shade800,
         ),
@@ -53,6 +66,8 @@ class MyApp extends StatelessWidget {
           settings: routeSettings,
           builder: (BuildContext context) {
             switch (routeSettings.name) {
+              case MovieDetails.routeName:
+                return const MovieDetails();
               default:
                 return const Homepage();
             }

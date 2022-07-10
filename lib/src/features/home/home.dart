@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tmdb_riverpod/src/features/home/movie_service.dart';
+import 'package:tmdb_riverpod/src/features/movie_details/movie_details.dart';
+import 'package:tmdb_riverpod/src/repositories/movie_service.dart';
 import 'package:tmdb_riverpod/src/utils/errors/movies_exception.dart';
 
 class Homepage extends ConsumerStatefulWidget {
@@ -31,10 +32,19 @@ class _HomepageState extends ConsumerState<Homepage> {
                   crossAxisSpacing: 3,
                   childAspectRatio: 0.7,
                   children: movies.map((movie) {
-                    return Image.network(
-                      movie.fullImageUrl,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
+                    return InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          MovieDetails.routeName,
+                          arguments: movie,
+                        );
+                      },
+                      child: Image.network(
+                        movie.fullImageUrl,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                      ),
                     );
                   }).toList(),
                 ),
