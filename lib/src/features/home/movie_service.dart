@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tmdb_riverpod/src/environment_config.dart';
 import 'package:tmdb_riverpod/src/features/home/movie_interface.dart';
 import 'package:tmdb_riverpod/src/models/movie.dart';
+import 'package:tmdb_riverpod/src/utils/errors/movies_exception.dart';
 
 class MovieService extends IMovie {
   MovieService({
@@ -33,9 +34,8 @@ class MovieService extends IMovie {
       }).toList(growable: false);
 
       return movies;
-    } on DioError catch (_) {
-      // TODO(anton): Implement custom errors
-      throw 'Error occured';
+    } on DioError catch (dioErr) {
+      throw MoviesException.fromDioError(dioErr);
     }
   }
 
@@ -52,8 +52,8 @@ final movieServiceProvider = Provider<MovieService>(
   ),
 );
 
-final moviesFutureProvider =
-    FutureProvider.autoDispose<List<Movie>>((ref) async {
+final moviesFutureProvider = FutureProvider.autoDispose<List<Movie>>(
+    (AutoDisposeFutureProviderRef<List<Movie>> ref) async {
   ref.maintainState = true;
 
   final movieService = ref.watch(movieServiceProvider);

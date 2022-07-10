@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tmdb_riverpod/src/features/home/movie_service.dart';
+import 'package:tmdb_riverpod/src/utils/errors/movies_exception.dart';
 
 class Homepage extends ConsumerStatefulWidget {
   const Homepage({super.key});
@@ -20,8 +21,9 @@ class _HomepageState extends ConsumerState<Homepage> {
       body: ref.watch(moviesFutureProvider).when(
             data: (movies) {
               return RefreshIndicator(
-                onRefresh: () =>
-                    ref.read(movieServiceProvider).getPopularMovies(),
+                onRefresh: () {
+                  return ref.refresh(moviesFutureProvider.future);
+                },
                 child: GridView.extent(
                   maxCrossAxisExtent: 300,
                   padding: const EdgeInsets.all(3),
@@ -39,8 +41,13 @@ class _HomepageState extends ConsumerState<Homepage> {
               );
             },
             error: (err, s) {
-              return Center(
-                child: Text('Err occured $err'),
+              if (err is MoviesException) {
+                return Center(
+                  child: Text('${err.message}'),
+                );
+              }
+              return const Center(
+                child: Text('Oops, Something went wrong'),
               );
             },
             loading: () => const Center(
