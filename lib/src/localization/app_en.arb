@@ -1,0 +1,6 @@
+{
+  "appTitle": "tmdb_riverpod",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
