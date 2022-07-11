@@ -4,16 +4,11 @@ import 'package:tmdb_riverpod/src/features/movie_details/movie_details.dart';
 import 'package:tmdb_riverpod/src/repositories/movie_service.dart';
 import 'package:tmdb_riverpod/src/utils/errors/movies_exception.dart';
 
-class Homepage extends ConsumerStatefulWidget {
+class Homepage extends ConsumerWidget {
   const Homepage({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _HomepageState();
-}
-
-class _HomepageState extends ConsumerState<Homepage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('TMDB'),

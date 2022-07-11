@@ -2,18 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tmdb_riverpod/src/models/movie.dart';
 
-class MovieDetails extends ConsumerStatefulWidget {
+class MovieDetails extends ConsumerWidget {
   const MovieDetails({super.key});
 
-  static const routeName = '/movie_details';
+  static const routeName = '/movie-details';
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _MovieDetailsState();
-}
-
-class _MovieDetailsState extends ConsumerState<MovieDetails> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     /**
      * We passed the movie arguments from homepage to this page. 
     **/
